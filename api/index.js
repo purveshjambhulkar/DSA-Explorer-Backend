@@ -5,7 +5,14 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+    origin: ["http://localhost:5173", "https://dsa-explorer-frontend.vercel.app"], // Allow frontend URLs
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization"
+};
+
+app.use(cors(corsOptions));
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
